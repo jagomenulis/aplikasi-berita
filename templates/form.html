@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+  {% if action == 'create' %}
+    <h2>Create Article</h2>
+    <form method="post" action="{{ url_for('create') }}">
+  {% else %}
+    <h2>Edit Article</h2>
+    <form method="post" action="{{ url_for('edit', article_id=article.id) }}">
+  {% endif %}
+    <div class="mb-3">
+      <label class="form-label">Title</label>
+      <input type="text" name="title" class="form-control" value="{{ article.title if article else '' }}">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Body</label>
+      <textarea name="body" class="form-control" rows="8">{{ article.body if article else '' }}</textarea>
+    </div>
+    <button class="btn btn-primary" type="submit">Save</button>
+    <a class="btn btn-secondary" href="{{ url_for('index') }}">Cancel</a>
+  </form>
+{% endblock %}

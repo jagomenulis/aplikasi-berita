@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>{{ article.title }}</h2>
+  <p class="text-muted">{{ article.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
+  <div class="mb-3">{{ article.body | nl2br }}</div>
+  <a class="btn btn-sm btn-primary" href="{{ url_for('edit', article_id=article.id) }}">Edit</a>
+  <form method="post" action="{{ url_for('delete', article_id=article.id) }}" style="display:inline;">
+    <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Delete this article?')">Delete</button>
+  </form>
+  <a class="btn btn-sm btn-secondary" href="{{ url_for('index') }}">Back</a>
+{% endblock %}

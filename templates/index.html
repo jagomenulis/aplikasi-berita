@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1>Articles</h1>
+  <a class="btn btn-success" href="{{ url_for('create') }}">New Article</a>
+</div>
+
+{% if articles %}
+  <div class="list-group">
+    {% for a in articles %}
+      <a href="{{ url_for('detail', article_id=a.id) }}" class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">{{ a.title }}</h5>
+          <small>{{ a.created_at.strftime('%Y-%m-%d %H:%M') }}</small>
+        </div>
+        <p class="mb-1">{{ a.body[:150] }}{% if a.body|length > 150 %}...{% endif %}</p>
+      </a>
+    {% endfor %}
+  </div>
+{% else %}
+  <p>No articles yet.</p>
+{% endif %}
+{% endblock %}
